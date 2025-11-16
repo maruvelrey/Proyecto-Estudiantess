@@ -4,14 +4,16 @@
   <meta charset="utf-8" />
   <title>Gestión de Estudiantes</title>
 
-<!--Audio-->
-  <audio id="soundClick" src="sounds/click.mp3" preload="auto"></audio>
-  <audio id="soundSuccess" src="sounds/success.mp3" preload="auto"></audio>
-  <audio id="soundError" src="sounds/error.mp3" preload="auto"></audio>
+  <!-- Audio -->
+  <audio id="soundClick" src="frontend/sounds/click.mp3" preload="auto"></audio>
+  <audio id="soundSuccess" src="frontend/sounds/success.mp3" preload="auto"></audio>
+  <audio id="soundError" src="frontend/sounds/error.mp3" preload="auto"></audio>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="frontend/css/style.css">
-  <script src="frontend/js/main.js"></script>
 
+  <!-- JS PRINCIPAL -->
+  <script src="frontend/js/main.js" defer></script>
 </head>
 
 <body>
@@ -104,21 +106,19 @@
   <button class="volver" onclick="playClick(); abrirSeccion('menuPrincipal')">⬅ Volver</button>
 </section>
 
-<!-- Editar  -->
+<!-- Editar Parcial -->
 <section id="editarParcial">
   <h2>Editar Estudiante (Parcial)</h2>
   <div>
     <input type="number" id="editParcialId" placeholder="ID" min="1" class="small-inline">
     <button class="small-btn" onclick="playClick(); mostrarOpcionesParcial()">Continuar</button>
   </div>
-
   <div id="parcialOpciones"></div>
   <div id="parcialCampo"></div>
-
   <button class="volver" onclick="playClick(); abrirSeccion('menuPrincipal')">⬅ Volver</button>
 </section>
 
-<!-- Eliminar Estudiante -->
+<!-- Eliminar -->
 <section id="eliminar">
   <h2>Eliminar Estudiante</h2>
   <div>
@@ -137,33 +137,24 @@ let bloqueoClick = false;
 function playClick(){
   if (bloqueoClick) return;
   const s = document.getElementById("soundClick");
-  s.pause();
-  s.currentTime = 0;
-  s.play().catch(()=>{});
+  s.pause(); s.currentTime = 0; s.play().catch(()=>{});
 }
 
 function playSuccess(){
   const s = document.getElementById("soundSuccess");
   bloqueoClick = true;
-  s.pause();
-  s.currentTime = 0;
-  s.play().catch(()=>{}).finally(()=>{
-    setTimeout(() => bloqueoClick = false, 300); 
-  });
+  s.pause(); s.currentTime = 0;
+  s.play().catch(()=>{}).finally(()=>setTimeout(()=>bloqueoClick=false,300));
 }
 
 function playError(){
   const s = document.getElementById("soundError");
-  bloqueoClick = true; // 🔒
-  s.pause();
-  s.currentTime = 0;
-  s.play().catch(()=>{}).finally(()=>{
-    setTimeout(() => bloqueoClick = false, 300); 
-  });
+  bloqueoClick = true;
+  s.pause(); s.currentTime = 0;
+  s.play().catch(()=>{}).finally(()=>setTimeout(()=>bloqueoClick=false,300));
 }
 </script>
 
-<script src="js/main.js"></script>
 </body>
 </html>
 
